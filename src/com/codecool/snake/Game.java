@@ -14,6 +14,7 @@ public class Game extends Pane {
     protected static List<SnakeHead> snakeHeads = new ArrayList<>();
 
     public Game() {
+
         HealthBar healthBar = new HealthBar(this, "P1: ", 30,60);
         SnakeHead snakeHead = new SnakeHead(this, 500, 500, Globals.player1KeyControl, healthBar);
         snakeHeads.add(snakeHead);
