@@ -2,9 +2,7 @@ package com.codecool.snake;
 
 import com.codecool.snake.entities.GameEntity;
 import com.codecool.snake.entities.Animatable;
-import com.codecool.snake.entities.snakes.SnakeHead;
 import javafx.animation.AnimationTimer;
-import javafx.scene.layout.Pane;
 
 public class GameLoop extends AnimationTimer {
 
@@ -19,6 +17,7 @@ public class GameLoop extends AnimationTimer {
             if (Game.checkGameOver()){
                 new GameOver();
                 Globals.gameLoop.stop();
+                Globals.stage.setScene(Globals.scene);
                 break;
             }
         }
