@@ -20,7 +20,6 @@ public class SnakeHead extends GameEntity implements Animatable {
     private boolean isAlive;
     private boolean healthChanged = false;
     HealthBar healthBar;
-    private boolean isP1 = false;
 
     public SnakeHead(Pane pane, int xc, int yc, KeyControl keyControl, HealthBar healthBar) {
         super(pane);
