@@ -15,7 +15,6 @@ public class Main extends Application {
 //        Game game = new Game();
         Game game = new MultiPlayerGame();
 
-
         primaryStage.setTitle("Snake Game");
         primaryStage.setScene(new Scene(game, Globals.WINDOW_WIDTH, Globals.WINDOW_HEIGHT));
         primaryStage.show();

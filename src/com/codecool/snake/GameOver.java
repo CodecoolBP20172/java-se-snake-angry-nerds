@@ -4,26 +4,21 @@ import com.codecool.snake.entities.GameEntity;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.effect.InnerShadow;
+import javafx.scene.image.Image;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
-import org.omg.CORBA.TIMEOUT;
-
-import java.util.concurrent.TimeUnit;
+import javafx.scene.image.ImageView;
 
 import static javafx.scene.paint.Color.*;
 
-public class GameOver {
+public class GameOver extends Pane {
 
     public GameOver() {
-        System.out.println("gameover");
         Pane pane = new Pane();
-        /*setX(Globals.WINDOW_WIDTH/2+30);
-        setY(Globals.WINDOW_HEIGHT/2);
-        setImage(Globals.gameOverImg);
-        pane.getChildren().add(this);*/
+        ImageView gameOverImage = new ImageView(Globals.gameOverImg);
         InnerShadow is = new InnerShadow();
         is.setOffsetX(4.0f);
         is.setOffsetY(4.0f);
@@ -34,6 +29,6 @@ public class GameOver {
         t.setText("GAME OVER");
         t.setFill(RED);
         t.setFont(Font.font(null, FontWeight.BOLD, 36));
-        pane.getChildren().add(t);
+        pane.getChildren().addAll(t);
     }
 }
