@@ -24,10 +24,10 @@ import javafx.util.Duration;
 
 public class Menu {
 
-    private static final Font FONT = Font.font("", FontWeight.BOLD, 18);
+    protected static final Font FONT = Font.font("", FontWeight.BOLD, 18);
 
-    private VBox menuBox;
-    private int currentItem = 0;
+    protected VBox menuBox;
+    protected int currentItem = 0;
 
     public Scene createScene() {
 
@@ -56,7 +56,7 @@ public class Menu {
     }
 
 
-    private Parent createContent() {
+    protected Parent createContent() {
         Pane root = new Pane();
         root.setPrefSize(900, 600);
 
@@ -80,24 +80,24 @@ public class Menu {
         MenuItem itemExit = new MenuItem("EXIT");
         itemExit.setOnActivate(() -> System.exit(0));
 
-        MenuItem itemOnePlayer = new MenuItem("ONE PLAYER");
-        itemOnePlayer.setOnActivate(() -> {
+        MenuItem singlePlayer = new MenuItem("SINGLE PLAYER");
+        singlePlayer.setOnActivate(() -> {
             Game game = new Game();
             Globals.stage.setScene(new Scene(game, Globals.WINDOW_WIDTH, Globals.WINDOW_HEIGHT));
             Globals.stage.show();
             game.start();
         });
 
-        MenuItem itemMultiPlayer = new MenuItem("TWO PLAYER");
+        MenuItem itemMultiPlayer = new MenuItem("MULTIPLE PLAYER");
         itemMultiPlayer.setOnActivate(() -> {
-            Game game = new MultiPlayerGame();
-            Globals.stage.setScene(new Scene(game, Globals.WINDOW_WIDTH, Globals.WINDOW_HEIGHT));
+            Globals.stage.setScene(new MultiMenu().createScene());
             Globals.stage.show();
-            game.start();
         });
 
+
+
         menuBox = new VBox(30,
-                itemOnePlayer,
+                singlePlayer,
                 itemMultiPlayer,
                 /*new MenuItem("ONLINE"),
                 new MenuItem("OPTIONS"),
@@ -113,7 +113,7 @@ public class Menu {
         return root;
     }
 
-    private Node createTitleContent() {
+    protected Node createTitleContent() {
         String title = "Angry Snakes";
         HBox letters = new HBox(0);
         letters.setAlignment(Pos.CENTER);
@@ -135,7 +135,7 @@ public class Menu {
         return letters;
     }
 
-    private Node createImageContent(int width, int height) {
+    protected Node createImageContent(int width, int height) {
 
         ImageView image = new ImageView();
         image.setImage(Globals.snakeMenu);
@@ -153,11 +153,11 @@ public class Menu {
         return image;
     }
 
-    private MenuItem getMenuItem(int index) {
+    protected MenuItem getMenuItem(int index) {
         return (MenuItem) menuBox.getChildren().get(index);
     }
 
-    private static class ContentFrame extends StackPane {
+    protected static class ContentFrame extends StackPane {
         public ContentFrame(Node content) {
             setAlignment(Pos.CENTER);
 
@@ -167,7 +167,7 @@ public class Menu {
         }
     }
 
-    private static class MenuItem extends HBox {
+    protected static class MenuItem extends HBox {
         private TriCircle c1 = new TriCircle(), c2 = new TriCircle();
         private Text text;
         private Runnable script;
@@ -201,7 +201,7 @@ public class Menu {
         }
     }
 
-    private static class TriCircle extends Parent {
+    protected static class TriCircle extends Parent {
         public TriCircle() {
             Shape shape1 = Shape.subtract(new Circle(5), new Circle(2));
             shape1.setFill(Color.BLACK);
