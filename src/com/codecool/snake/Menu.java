@@ -58,7 +58,7 @@ public class Menu {
 
     protected Parent createContent() {
         Pane root = new Pane();
-        root.setPrefSize(900, 600);
+        root.setPrefSize(Globals.WINDOW_WIDTH, Globals.WINDOW_HEIGHT);
 
         /*ImageView backGround = new ImageView();
         backGround.setImage(Globals.snakeMenu);
@@ -66,16 +66,16 @@ public class Menu {
         backGround.setFitHeight(600);
         backGround.setOpacity(0);*/
 
-        Rectangle backGround = new Rectangle(900, 600);
+        Rectangle backGround = new Rectangle(Globals.WINDOW_WIDTH, Globals.WINDOW_HEIGHT);
         backGround.setFill(Color.WHITESMOKE);
 
         ContentFrame frame1 = new ContentFrame(createTitleContent());
-        ContentFrame frame2 = new ContentFrame(createImageContent(120, 120));
+        ContentFrame frame2 = new ContentFrame(createImageContent(140, 140));
 
-        VBox hbox = new VBox(15, frame1, frame2);
+        VBox hbox = new VBox(25, frame1, frame2);
         hbox.setAlignment(Pos.BOTTOM_LEFT);
-        hbox.setTranslateX(270);
-        hbox.setTranslateY(90);
+        hbox.setTranslateX(300);
+        hbox.setTranslateY(120);
 
         MenuItem itemExit = new MenuItem("EXIT");
         itemExit.setOnActivate(() -> System.exit(0));
@@ -99,13 +99,10 @@ public class Menu {
         menuBox = new VBox(30,
                 singlePlayer,
                 itemMultiPlayer,
-                /*new MenuItem("ONLINE"),
-                new MenuItem("OPTIONS"),
-                new MenuItem("EXTRAS*"),*/
                 itemExit);
         menuBox.setAlignment(Pos.TOP_CENTER);
-        menuBox.setTranslateX(360);
-        menuBox.setTranslateY(350);
+        menuBox.setTranslateX(375);
+        menuBox.setTranslateY(400);
 
         getMenuItem(0).setActive(true);
 
@@ -160,10 +157,7 @@ public class Menu {
     protected static class ContentFrame extends StackPane {
         public ContentFrame(Node content) {
             setAlignment(Pos.CENTER);
-
-            Rectangle frame = new Rectangle(0, 0);
-            frame.setOpacity(0);
-            getChildren().addAll(frame, content);
+            getChildren().addAll(content);
         }
     }
 

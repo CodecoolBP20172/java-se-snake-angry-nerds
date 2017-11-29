@@ -4,10 +4,10 @@ import com.codecool.snake.entities.snakes.SnakeHead;
 
 public class MultiPlayerGame extends Game {
 
-    public MultiPlayerGame(){
+    public MultiPlayerGame(int numberOfSnakes){
         super();
-        SnakeHead snake2 = new SnakeHead(this, 300, 300, Globals.player2KeyControl);
-        snakeHeads.add(snake2);
-
+        for (int i = 1; i < numberOfSnakes; i++) {
+            snakeHeads.add(new SnakeHead(this, i*200, 650, Globals.keyControls.get(i)));
+        }
     }
 }

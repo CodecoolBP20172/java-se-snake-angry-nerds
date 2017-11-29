@@ -6,6 +6,7 @@ import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
@@ -28,6 +29,10 @@ public class Globals {
 
     public static KeyControl player1KeyControl = new KeyControl();
     public static KeyControl player2KeyControl = new KeyControl();
+    public static KeyControl player3KeyControl = new KeyControl();
+    public static KeyControl player4KeyControl = new KeyControl();
+    public static List<KeyControl> keyControls = addKeyControls();
+
     public static List<GameEntity> gameObjects;
     public static List<GameEntity> newGameObjects; // Holds game objects crated in this frame.
     public static List<GameEntity> oldGameObjects; // Holds game objects that will be destroyed this frame.
@@ -49,5 +54,14 @@ public class Globals {
 
     public static List<GameEntity> getGameObjects() {
         return Collections.unmodifiableList(gameObjects);
+    }
+
+    public static List<KeyControl> addKeyControls() {
+        ArrayList<KeyControl> keyControls = new ArrayList <>();
+        keyControls.add(player1KeyControl);
+        keyControls.add(player2KeyControl);
+        keyControls.add(player3KeyControl);
+        keyControls.add(player4KeyControl);
+        return keyControls;
     }
 }

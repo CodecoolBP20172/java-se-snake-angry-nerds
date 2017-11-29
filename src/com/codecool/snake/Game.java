@@ -15,7 +15,7 @@ public class Game extends Pane {
 
     public Game() {
 
-        SnakeHead snakeHead = new SnakeHead(this, 500, 500, Globals.player1KeyControl);
+        SnakeHead snakeHead = new SnakeHead(this, 800, 650, Globals.player1KeyControl);
         snakeHeads.add(snakeHead);
 
         new SimpleEnemy(this);
@@ -39,6 +39,10 @@ public class Game extends Pane {
                 case RIGHT: Globals.player1KeyControl.setRightKeyPressed(true); break;
                 case A: Globals.player2KeyControl.setLeftKeyPressed(true); break;
                 case D: Globals.player2KeyControl.setRightKeyPressed(true); break;
+                case NUMPAD4:  Globals.player3KeyControl.setLeftKeyPressed(true); break;
+                case NUMPAD6: Globals.player3KeyControl.setRightKeyPressed(true); break;
+                case B: Globals.player4KeyControl.setLeftKeyPressed(true); break;
+                case M: Globals.player4KeyControl.setRightKeyPressed(true); break;
             }
         });
 
@@ -48,7 +52,10 @@ public class Game extends Pane {
                 case RIGHT: Globals.player1KeyControl.setRightKeyPressed(false); break;
                 case A: Globals.player2KeyControl.setLeftKeyPressed(false); break;
                 case D: Globals.player2KeyControl.setRightKeyPressed(false); break;
-
+                case NUMPAD4:  Globals.player3KeyControl.setLeftKeyPressed(false); break;
+                case NUMPAD6: Globals.player3KeyControl.setRightKeyPressed(false); break;
+                case B: Globals.player4KeyControl.setLeftKeyPressed(false); break;
+                case M: Globals.player4KeyControl.setRightKeyPressed(false); break;
             }
         });
         Globals.gameLoop = new GameLoop();

@@ -15,24 +15,18 @@ public class MultiMenu extends Menu {
     protected Parent createContent(){
 
         Pane root = new Pane();
-        root.setPrefSize(900, 600);
+        root.setPrefSize(Globals.WINDOW_WIDTH, Globals.WINDOW_HEIGHT);
 
-        ImageView backGround = new ImageView();
-        backGround.setImage(Globals.snakeMenu);
-        backGround.setFitWidth(900);
-        backGround.setFitHeight(600);
-        backGround.setOpacity(0);
-
-        /*Rectangle backGround = new Rectangle(900, 600);
-        backGround.setFill(Color.WHITESMOKE);*/
+        Rectangle backGround = new Rectangle(Globals.WINDOW_WIDTH, Globals.WINDOW_HEIGHT);
+        backGround.setFill(Color.WHITESMOKE);
 
         ContentFrame frame1 = new ContentFrame(createTitleContent());
-        ContentFrame frame2 = new ContentFrame(createImageContent(120, 120));
+        ContentFrame frame2 = new ContentFrame(createImageContent(140, 140));
 
-        VBox hbox = new VBox(15, frame1, frame2);
+        VBox hbox = new VBox(25, frame1, frame2);
         hbox.setAlignment(Pos.BOTTOM_LEFT);
-        hbox.setTranslateX(270);
-        hbox.setTranslateY(90);
+        hbox.setTranslateX(300);
+        hbox.setTranslateY(120);
 
         MenuItem itemBack = new MenuItem("BACK");
         itemBack.setOnActivate(() -> {
@@ -41,10 +35,9 @@ public class MultiMenu extends Menu {
 
         });
 
-
         MenuItem itemTwoPlayers = new MenuItem("TWO PLAYERS");
         itemTwoPlayers.setOnActivate(() -> {
-            Game game = new MultiPlayerGame();
+            Game game = new MultiPlayerGame(2);
             Globals.stage.setScene(new Scene(game, Globals.WINDOW_WIDTH, Globals.WINDOW_HEIGHT));
             Globals.stage.show();
             game.start();
@@ -52,21 +45,19 @@ public class MultiMenu extends Menu {
 
         MenuItem itemThreePlayers = new MenuItem("THREE PLAYERS");
         itemThreePlayers.setOnActivate(() -> {
-            Game game = new MultiPlayerGame();
+            Game game = new MultiPlayerGame(3);
             Globals.stage.setScene(new Scene(game, Globals.WINDOW_WIDTH, Globals.WINDOW_HEIGHT));
             Globals.stage.show();
-
+            game.start();
         });
 
         MenuItem itemFourPlayers = new MenuItem("FOUR PLAYERS");
         itemFourPlayers.setOnActivate(() -> {
-            Game game = new MultiPlayerGame();
+            Game game = new MultiPlayerGame(4);
             Globals.stage.setScene(new Scene(game, Globals.WINDOW_WIDTH, Globals.WINDOW_HEIGHT));
             Globals.stage.show();
-
+            game.start();
         });
-
-
 
         menuBox = new VBox(15,
                 itemTwoPlayers,
@@ -75,8 +66,8 @@ public class MultiMenu extends Menu {
                 new MenuItem("CONTROLS"),
                 itemBack);
         menuBox.setAlignment(Pos.TOP_CENTER);
-        menuBox.setTranslateX(360);
-        menuBox.setTranslateY(350);
+        menuBox.setTranslateX(375);
+        menuBox.setTranslateY(400);
 
         getMenuItem(0).setActive(true);
 
