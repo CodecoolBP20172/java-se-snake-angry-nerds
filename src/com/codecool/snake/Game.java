@@ -33,6 +33,8 @@ public class Game extends Pane {
         Scene scene = getScene();
         scene.setOnKeyPressed(event -> {
             switch (event.getCode()) {
+                case ESCAPE: Globals.gameLoop.stop();
+                            Globals.stage.setScene(Globals.scene); break;
                 case LEFT:  Globals.player1KeyControl.setLeftKeyPressed(true); break;
                 case RIGHT: Globals.player1KeyControl.setRightKeyPressed(true); break;
                 case A: Globals.player2KeyControl.setLeftKeyPressed(true); break;
