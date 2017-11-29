@@ -19,11 +19,10 @@ public class SnakeHead extends GameEntity implements Animatable {
     private KeyControl keyControl;
     private boolean isAlive;
     private boolean healthChanged = false;
-    HealthBar healthBarP1;
-    HealthBar healthBarP2;
+    HealthBar healthBar;
     private boolean isP1 = false;
 
-    public SnakeHead(Pane pane, int xc, int yc, KeyControl keyControl) {
+    public SnakeHead(Pane pane, int xc, int yc, KeyControl keyControl, HealthBar healthBar) {
         super(pane);
         setX(xc);
         setY(yc);
@@ -33,23 +32,14 @@ public class SnakeHead extends GameEntity implements Animatable {
         pane.getChildren().add(this);
         this.keyControl = keyControl;
         isAlive = true;
-        if (keyControl == Globals.player1KeyControl) {
-            isP1 = true;
-            healthBarP1 = new HealthBar(pane, "P1: ",30,60);
-        } else if (keyControl == Globals.player2KeyControl){
-            healthBarP2 = new HealthBar(pane, "P2: ",30,100);
-        }
+        this.healthBar = healthBar;
         addPart(4);
     }
 
     public void step() {
         if (healthChanged) {
             this.healthChanged = false;
-            if (isP1) {
-                healthBarP1.changeHealth(this.health);
-            } else {
-                healthBarP2.changeHealth(this.health);
-            }
+            healthBar.changeHealth(this.health);
         }
         if (!isAlive) {
             return;
@@ -80,11 +70,7 @@ public class SnakeHead extends GameEntity implements Animatable {
 
         // check for game over condition
         if (isOutOfBounds() || health <= 0) {
-            if (isP1) {
-                healthBarP1.changeHealth(0);
-            } else {
-                healthBarP2.changeHealth(0);
-            }
+            healthBar.changeHealth(0);
             isAlive = false;
             System.out.println("Game Over");
             /*
