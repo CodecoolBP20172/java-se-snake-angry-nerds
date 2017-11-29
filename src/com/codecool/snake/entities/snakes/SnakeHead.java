@@ -1,5 +1,6 @@
 package com.codecool.snake.entities.snakes;
 
+import com.codecool.snake.HealthBar;
 import com.codecool.snake.KeyControl;
 import com.codecool.snake.entities.GameEntity;
 import com.codecool.snake.Globals;
@@ -8,7 +9,6 @@ import com.codecool.snake.Utils;
 import com.codecool.snake.entities.Interactable;
 import javafx.geometry.Point2D;
 import javafx.scene.layout.Pane;
-import java.lang.reflect.*;
 
 public class SnakeHead extends GameEntity implements Animatable {
 
@@ -18,8 +18,10 @@ public class SnakeHead extends GameEntity implements Animatable {
     private int health;
     private KeyControl keyControl;
     private boolean isAlive;
+    private boolean healthChanged = false;
+    HealthBar healthBar;
 
-    public SnakeHead(Pane pane, int xc, int yc, KeyControl keyControl) {
+    public SnakeHead(Pane pane, int xc, int yc, KeyControl keyControl, HealthBar healthBar) {
         super(pane);
         setX(xc);
         setY(yc);
@@ -29,10 +31,15 @@ public class SnakeHead extends GameEntity implements Animatable {
         pane.getChildren().add(this);
         this.keyControl = keyControl;
         isAlive = true;
+        this.healthBar = healthBar;
         addPart(4);
     }
 
     public void step() {
+        if (healthChanged) {
+            this.healthChanged = false;
+            healthBar.changeHealth(this.health);
+        }
         if (!isAlive) {
             return;
         }
@@ -62,6 +69,7 @@ public class SnakeHead extends GameEntity implements Animatable {
 
         // check for game over condition
         if (isOutOfBounds() || health <= 0) {
+            healthBar.changeHealth(0);
             isAlive = false;
             System.out.println("Game Over");
             /*
@@ -78,9 +86,11 @@ public class SnakeHead extends GameEntity implements Animatable {
 
     public void changeHealth(int diff) {
         health += diff;
+        healthChanged = true;
     }
 
     public boolean isAlive() {
         return isAlive;
     }
+
 }
