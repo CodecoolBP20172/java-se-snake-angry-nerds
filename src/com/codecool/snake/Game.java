@@ -14,6 +14,7 @@ public class Game extends Pane {
     protected static List<SnakeHead> snakeHeads = new ArrayList<>();
 
     public Game() {
+
         HealthBar healthBar = new HealthBar(this, "P1: ", 30,60);
         SnakeHead snakeHead = new SnakeHead(this, 500, 500, Globals.player1KeyControl, healthBar);
         snakeHeads.add(snakeHead);
@@ -33,10 +34,16 @@ public class Game extends Pane {
         Scene scene = getScene();
         scene.setOnKeyPressed(event -> {
             switch (event.getCode()) {
+                case ESCAPE: Globals.gameLoop.stop();
+                            Globals.stage.setScene(Globals.scene); break;
                 case LEFT:  Globals.player1KeyControl.setLeftKeyPressed(true); break;
                 case RIGHT: Globals.player1KeyControl.setRightKeyPressed(true); break;
                 case A: Globals.player2KeyControl.setLeftKeyPressed(true); break;
                 case D: Globals.player2KeyControl.setRightKeyPressed(true); break;
+                case NUMPAD4:  Globals.player3KeyControl.setLeftKeyPressed(true); break;
+                case NUMPAD6: Globals.player3KeyControl.setRightKeyPressed(true); break;
+                case B: Globals.player4KeyControl.setLeftKeyPressed(true); break;
+                case M: Globals.player4KeyControl.setRightKeyPressed(true); break;
             }
         });
 
@@ -46,7 +53,10 @@ public class Game extends Pane {
                 case RIGHT: Globals.player1KeyControl.setRightKeyPressed(false); break;
                 case A: Globals.player2KeyControl.setLeftKeyPressed(false); break;
                 case D: Globals.player2KeyControl.setRightKeyPressed(false); break;
-
+                case NUMPAD4:  Globals.player3KeyControl.setLeftKeyPressed(false); break;
+                case NUMPAD6: Globals.player3KeyControl.setRightKeyPressed(false); break;
+                case B: Globals.player4KeyControl.setLeftKeyPressed(false); break;
+                case M: Globals.player4KeyControl.setRightKeyPressed(false); break;
             }
         });
         Globals.gameLoop = new GameLoop();
