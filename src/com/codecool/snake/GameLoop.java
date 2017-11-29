@@ -14,6 +14,9 @@ public class GameLoop extends AnimationTimer {
                 Animatable animObject = (Animatable)gameObject;
                 animObject.step();
             }
+            if (Game.checkGameOver()){
+                Globals.gameLoop.stop();
+            }
         }
         Globals.gameObjects.addAll(Globals.newGameObjects);
         Globals.newGameObjects.clear();
