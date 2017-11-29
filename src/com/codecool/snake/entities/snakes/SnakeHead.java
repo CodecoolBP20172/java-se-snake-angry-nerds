@@ -8,13 +8,16 @@ import com.codecool.snake.Utils;
 import com.codecool.snake.entities.Interactable;
 import javafx.geometry.Point2D;
 import javafx.scene.layout.Pane;
-import java.lang.reflect.*;
+import java.util.ArrayList;
+import java.util.List;
+import javafx.geometry.Bounds;
 
 public class SnakeHead extends GameEntity implements Animatable {
 
     private static final float speed = 2;
     private static final float turnRate = 2;
     private GameEntity tail; // the last element. Needed to know where to add the next part.
+    private static List<SnakeBody> bodyParts = new ArrayList<>();
     private int health;
     private KeyControl keyControl;
     private boolean isAlive;
@@ -57,6 +60,12 @@ public class SnakeHead extends GameEntity implements Animatable {
                     interactable.apply(this);
                     System.out.println(interactable.getMessage());
                 }
+                else if (entity instanceof SnakeBody && ((SnakeBody) entity).getSnakeHead() != this){
+                    if (snakeIntersects((SnakeBody) entity)){
+                        health = 0;
+                    };
+//                    entity instanceof SnakeHead && entity != this
+                }
             }
         }
 
@@ -72,8 +81,18 @@ public class SnakeHead extends GameEntity implements Animatable {
     public void addPart(int numParts) {
         for (int i = 0; i < numParts; i++) {
             SnakeBody newPart = new SnakeBody(pane, tail);
+            bodyParts.add(newPart);
             tail = newPart;
         }
+    }
+
+    public List<SnakeBody> getBodyParts(){
+        return bodyParts;
+    }
+
+    public List<SnakeBody> getBodyPartsBySnakeHead(SnakeHead head){
+        
+        return bodyParts;
     }
 
     public void changeHealth(int diff) {
@@ -82,5 +101,20 @@ public class SnakeHead extends GameEntity implements Animatable {
 
     public boolean isAlive() {
         return isAlive;
+    }
+
+    private boolean snakeIntersects(SnakeBody b) {
+        Bounds headBounds = getBoundsInParent();
+        Bounds bodyBounds = b.getBoundsInParent();
+        Point2D headCenter = new Point2D((headBounds.getMaxX() + headBounds.getMinX()) * 0.5,
+                (headBounds.getMaxY() + headBounds.getMinY()) * 0.5);
+        Point2D bodyCenter = new Point2D((bodyBounds.getMaxX() + bodyBounds.getMinX()) * 0.5,
+                (bodyBounds.getMaxY() + bodyBounds.getMinY()) * 0.5);
+        final double radius = (bodyBounds.getMaxX() - bodyBounds.getMinX()) * 0.5;
+        /**
+         * Subtraction gives us a vector pointing from the body to the head.
+         * Magnitude gives us the length of this vector (distance of the two points).
+         */
+        return headCenter.subtract(bodyCenter).magnitude() < 2.0 * radius;
     }
 }
