@@ -1,6 +1,7 @@
 package com.codecool.snake;
 
 import com.codecool.snake.entities.GameEntity;
+import javafx.application.Application;
 import javafx.scene.effect.InnerShadow;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
@@ -12,6 +13,7 @@ public class GameOver extends GameEntity {
 
     public GameOver(Pane pane) {
         super(pane);
+        pane.getChildren().clear();
         setX(Globals.WINDOW_WIDTH/2+30);
         setY(Globals.WINDOW_HEIGHT/2);
         setImage(Globals.gameOverImg);
