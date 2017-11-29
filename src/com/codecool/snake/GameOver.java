@@ -1,34 +1,60 @@
 package com.codecool.snake;
 
-import com.codecool.snake.entities.GameEntity;
-import javafx.application.Application;
+import javafx.geometry.Pos;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.effect.InnerShadow;
-import javafx.scene.image.Image;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
-import javafx.scene.text.Font;
-import javafx.scene.text.FontWeight;
-import javafx.scene.text.Text;
-import javafx.scene.image.ImageView;
+import javafx.scene.shape.Rectangle;
 
-import static javafx.scene.paint.Color.*;
 
-public class GameOver extends Pane {
+public class GameOver extends Menu {
 
-    public GameOver() {
-        Pane pane = new Pane();
-        ImageView gameOverImage = new ImageView(Globals.gameOverImg);
-        InnerShadow is = new InnerShadow();
-        is.setOffsetX(4.0f);
-        is.setOffsetY(4.0f);
-        Text t = new Text();
-        t.setEffect(is);
-        t.setX(Globals.WINDOW_WIDTH/2);
-        t.setY(Globals.WINDOW_HEIGHT/2-30);
-        t.setText("GAME OVER");
-        t.setFill(RED);
-        t.setFont(Font.font(null, FontWeight.BOLD, 36));
-        pane.getChildren().addAll(t);
+    protected Parent createContent() {
+        Pane root = new Pane();
+        root.setPrefSize(Globals.WINDOW_WIDTH, Globals.WINDOW_HEIGHT);
+
+        Rectangle backGround = new Rectangle(Globals.WINDOW_WIDTH, Globals.WINDOW_HEIGHT);
+        backGround.setFill(Color.WHITESMOKE);
+        ContentFrame frame1 = new ContentFrame(createTitleContent("Game Over"));
+        ContentFrame frame2 = new ContentFrame(createImageContent(140, 140, Globals.gameOverImg));
+
+        VBox hbox = new VBox(25, frame1, frame2);
+        hbox.setAlignment(Pos.BOTTOM_LEFT);
+        hbox.setTranslateX(350);
+        hbox.setTranslateY(120);
+
+        MenuItem itemBack = new MenuItem("BACK TO MAIN MENU");
+        itemBack.setOnActivate(() -> {
+            Globals.stage.setScene(Globals.scene);
+            Globals.stage.show();
+
+        });
+
+        MenuItem restart = new MenuItem("RESTART");
+        restart.setOnActivate(() -> {
+            if (Globals.numOfPlayers == 1) {
+                Game game = new Game();
+                Globals.stage.setScene(new Scene(game, Globals.WINDOW_WIDTH, Globals.WINDOW_HEIGHT));
+                Globals.stage.show();
+                game.start();
+            } else {
+                Game game = new MultiPlayerGame(Globals.numOfPlayers);
+                Globals.stage.setScene(new Scene(game, Globals.WINDOW_WIDTH, Globals.WINDOW_HEIGHT));
+                Globals.stage.show();
+                game.start();
+            }
+        });
+        menuBox = new VBox(15,
+                restart,
+                itemBack);
+        menuBox.setAlignment(Pos.TOP_CENTER);
+        menuBox.setTranslateX(375);
+        menuBox.setTranslateY(400);
+
+        getMenuItem(0).setActive(true);
+        root.getChildren().addAll(backGround, hbox, menuBox);
+        return root;
     }
 }

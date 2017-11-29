@@ -7,6 +7,7 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.effect.GaussianBlur;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.HBox;
@@ -69,8 +70,8 @@ public class Menu {
         Rectangle backGround = new Rectangle(Globals.WINDOW_WIDTH, Globals.WINDOW_HEIGHT);
         backGround.setFill(Color.WHITESMOKE);
 
-        ContentFrame frame1 = new ContentFrame(createTitleContent());
-        ContentFrame frame2 = new ContentFrame(createImageContent(140, 140));
+        ContentFrame frame1 = new ContentFrame(createTitleContent("Angry Snake"));
+        ContentFrame frame2 = new ContentFrame(createImageContent(140, 140, Globals.snakeMenu));
 
         VBox hbox = new VBox(25, frame1, frame2);
         hbox.setAlignment(Pos.BOTTOM_LEFT);
@@ -83,6 +84,7 @@ public class Menu {
         MenuItem singlePlayer = new MenuItem("SINGLE PLAYER");
         singlePlayer.setOnActivate(() -> {
             Game game = new Game();
+            Globals.numOfPlayers = 1;
             Globals.stage.setScene(new Scene(game, Globals.WINDOW_WIDTH, Globals.WINDOW_HEIGHT));
             Globals.stage.show();
             game.start();
@@ -110,8 +112,8 @@ public class Menu {
         return root;
     }
 
-    protected Node createTitleContent() {
-        String title = "Angry Snakes";
+    protected Node createTitleContent(String theTitle) {
+        String title = theTitle;
         HBox letters = new HBox(0);
         letters.setAlignment(Pos.CENTER);
         for (int i = 0; i < title.length(); i++) {
@@ -132,10 +134,10 @@ public class Menu {
         return letters;
     }
 
-    protected Node createImageContent(int width, int height) {
+    protected Node createImageContent(int width, int height, Image theImage) {
 
         ImageView image = new ImageView();
-        image.setImage(Globals.snakeMenu);
+        image.setImage(theImage);
         image.setFitHeight(height);
         image.setFitWidth(width);
         image.setOpacity(0);
