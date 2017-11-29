@@ -21,7 +21,6 @@ public class SimpleEnemy extends GameEntity implements Animatable, Interactable 
 
     public SimpleEnemy(Pane pane) {
         super(pane);
-
         setImage(Globals.simpleEnemy);
         pane.getChildren().add(this);
         int speed = 1;
@@ -54,11 +53,11 @@ public class SimpleEnemy extends GameEntity implements Animatable, Interactable 
 
     private boolean checkSnakes(GameEntity gameEntity){
         for (SnakeHead head : Game.snakeHeads) {
-            if (gameEntity.intersects(head.getLayoutBounds())) {
+            if (head.snakeIntersects(this)) {
                 return false;
             }
             for (SnakeBody body : head.getBodyParts()) {
-                if (gameEntity.intersects(body.getLayoutBounds())) {
+                if (body.snakeIntersects(this)) {
                     return false;
                 }
             }
@@ -70,8 +69,7 @@ public class SimpleEnemy extends GameEntity implements Animatable, Interactable 
     public void apply(SnakeHead player) {
         player.changeHealth(-damage);
         Random rnd = new Random();
-        setX(rnd.nextDouble() * Globals.WINDOW_WIDTH);
-        setY(rnd.nextDouble() * Globals.WINDOW_HEIGHT);
+        setCoordinates(rnd);
         double direction = rnd.nextDouble() * 360;
         heading = Utils.directionToVector(direction, 1);
         setRotate(direction);

@@ -111,14 +111,5 @@ public class SnakeHead extends GameEntity implements Animatable {
         return isAlive;
     }
 
-    private boolean snakeIntersects(GameEntity b) {
-        Bounds headBounds = getBoundsInParent();
-        Bounds bodyBounds = b.getBoundsInParent();
-        Point2D headCenter = new Point2D((headBounds.getMaxX() + headBounds.getMinX()) * 0.5,
-                (headBounds.getMaxY() + headBounds.getMinY()) * 0.5);
-        Point2D bodyCenter = new Point2D((bodyBounds.getMaxX() + bodyBounds.getMinX()) * 0.5,
-                (bodyBounds.getMaxY() + bodyBounds.getMinY()) * 0.5);
-        final double radius = (bodyBounds.getMaxX() - bodyBounds.getMinX()) * 0.5;
-        return headCenter.subtract(bodyCenter).magnitude() < 2.0 * radius;
-    }
+
 }
