@@ -1,12 +1,19 @@
 package com.codecool.snake;
 
 import com.codecool.snake.entities.enemies.SimpleEnemy;
+import com.codecool.snake.entities.powerups.OppositePowerup;
 import com.codecool.snake.entities.powerups.SimplePowerup;
 import com.codecool.snake.entities.snakes.SnakeHead;
 import javafx.scene.Scene;
 import javafx.scene.layout.Pane;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
+
+import javax.swing.Timer;
+import java.io.File;
 
 public class Game extends Pane {
+
 
     public Game() {
         new SnakeHead(this, 500, 500);
@@ -14,15 +21,23 @@ public class Game extends Pane {
         new SimpleEnemy(this);
         new SimpleEnemy(this);
         new SimpleEnemy(this);
-        new SimpleEnemy(this);
 
         new SimplePowerup(this);
         new SimplePowerup(this);
         new SimplePowerup(this);
         new SimplePowerup(this);
+
+        new OppositePowerup(this);
+        new OppositePowerup(this);
+    }
+
+    public void createPowerup() {
+        new SimplePowerup(this);
+
     }
 
     public void start() {
+
         Scene scene = getScene();
         scene.setOnKeyPressed(event -> {
             switch (event.getCode()) {
@@ -34,10 +49,11 @@ public class Game extends Pane {
         scene.setOnKeyReleased(event -> {
             switch (event.getCode()) {
                 case LEFT:  Globals.leftKeyDown  = false; break;
-                case RIGHT: Globals.rightKeyDown  = false; break;
+                case RIGHT: Globals.rightKeyDown = false; break;
             }
         });
         Globals.gameLoop = new GameLoop();
         Globals.gameLoop.start();
+        Globals.mediaPlayer1.play();
     }
 }

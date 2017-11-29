@@ -2,6 +2,7 @@ package com.codecool.snake;
 
 import com.codecool.snake.entities.GameEntity;
 import com.codecool.snake.entities.Animatable;
+import com.codecool.snake.entities.powerups.SimplePowerup;
 import javafx.animation.AnimationTimer;
 
 public class GameLoop extends AnimationTimer {
