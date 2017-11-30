@@ -28,13 +28,6 @@ public class MultiMenu extends Menu {
         hbox.setTranslateX(300);
         hbox.setTranslateY(120);
 
-        MenuItem itemBack = new MenuItem("BACK");
-        itemBack.setOnActivate(() -> {
-            Globals.stage.setScene(Globals.scene);
-            Globals.stage.show();
-
-        });
-
         MenuItem itemTwoPlayers = new MenuItem("TWO PLAYERS");
         itemTwoPlayers.setOnActivate(() -> {
             Game game = new MultiPlayerGame(2);
@@ -59,11 +52,23 @@ public class MultiMenu extends Menu {
             game.start();
         });
 
+        MenuItem itemControls = new MenuItem("CONTROLS");
+        itemControls.setOnActivate(() -> {
+            Globals.stage.setScene(new Controls().createScene());
+            Globals.stage.show();
+        });
+
+        MenuItem itemBack = new MenuItem("BACK");
+        itemBack.setOnActivate(() -> {
+            Globals.stage.setScene(Globals.scene);
+            Globals.stage.show();
+        });
+
         menuBox = new VBox(15,
                 itemTwoPlayers,
                 itemThreePlayers,
                 itemFourPlayers,
-                new MenuItem("CONTROLS"),
+                itemControls,
                 itemBack);
         menuBox.setAlignment(Pos.TOP_CENTER);
         menuBox.setTranslateX(375);
