@@ -27,8 +27,8 @@ public class Game extends Pane {
 
     public Game() {
 
-        HealthBar healthBar = new HealthBar(this, "P1: ", 30, 60);
-        SnakeHead snakeHead = new SnakeHead(this, 500, 500, Globals.player1KeyControl, healthBar);
+        HealthBar healthBar = new HealthBar(this, "P1: ", 30,60);
+        SnakeHead snakeHead = new SnakeHead(this, 500, 500, Globals.player1KeyControl, healthBar, 0);
         snakeHeads.add(snakeHead);
         setBackground(Globals.background);
 
@@ -90,12 +90,12 @@ public class Game extends Pane {
                             Globals.stage.setScene(Globals.scene); break;
                 case LEFT:  Globals.player1KeyControl.setLeftKeyPressed(true); break;
                 case RIGHT: Globals.player1KeyControl.setRightKeyPressed(true); break;
-                case A: Globals.player2KeyControl.setLeftKeyPressed(true); break;
-                case D: Globals.player2KeyControl.setRightKeyPressed(true); break;
-                case NUMPAD4:  Globals.player3KeyControl.setLeftKeyPressed(true); break;
-                case NUMPAD6: Globals.player3KeyControl.setRightKeyPressed(true); break;
-                case B: Globals.player4KeyControl.setLeftKeyPressed(true); break;
-                case M: Globals.player4KeyControl.setRightKeyPressed(true); break;
+                case Q: Globals.player2KeyControl.setLeftKeyPressed(true); break;
+                case W: Globals.player2KeyControl.setRightKeyPressed(true); break;
+                case C: Globals.player3KeyControl.setLeftKeyPressed(true); break;
+                case V: Globals.player3KeyControl.setRightKeyPressed(true); break;
+                case K: Globals.player4KeyControl.setLeftKeyPressed(true); break;
+                case L: Globals.player4KeyControl.setRightKeyPressed(true); break;
             }
         });
 
@@ -103,12 +103,12 @@ public class Game extends Pane {
             switch (event.getCode()) {
                 case LEFT:  Globals.player1KeyControl.setLeftKeyPressed(false); break;
                 case RIGHT: Globals.player1KeyControl.setRightKeyPressed(false); break;
-                case A: Globals.player2KeyControl.setLeftKeyPressed(false); break;
-                case D: Globals.player2KeyControl.setRightKeyPressed(false); break;
-                case NUMPAD4:  Globals.player3KeyControl.setLeftKeyPressed(false); break;
-                case NUMPAD6: Globals.player3KeyControl.setRightKeyPressed(false); break;
-                case B: Globals.player4KeyControl.setLeftKeyPressed(false); break;
-                case M: Globals.player4KeyControl.setRightKeyPressed(false); break;
+                case Q: Globals.player2KeyControl.setLeftKeyPressed(false); break;
+                case W: Globals.player2KeyControl.setRightKeyPressed(false); break;
+                case C: Globals.player3KeyControl.setLeftKeyPressed(false); break;
+                case V: Globals.player3KeyControl.setRightKeyPressed(false); break;
+                case K: Globals.player4KeyControl.setLeftKeyPressed(false); break;
+                case L: Globals.player4KeyControl.setRightKeyPressed(false); break;
             }
         });
         Globals.gameLoop = new GameLoop();
