@@ -17,11 +17,16 @@ public class Globals {
     public static final double WINDOW_WIDTH = 1000;
     public static final double WINDOW_HEIGHT = 700;
 
-    public static Image snakeHead = new Image("snake_head_slow.png");
+    public static Image snakeHead = new Image("snake_head.png");
+    public static Image snakeHeadSlow = new Image("snake_head_slow_2.png");
+    public static Image snakeHeadFast = new Image("snake_head_fast.png");
     public static Image snakeBody = new Image("snake_body.png");
     public static Image simpleEnemy = new Image("simple_enemy.png");
     public static Image powerupBerry = new Image("powerup_berry.png");
+    public static Image speedUp = new Image("SpeedUp.png");
+    public static Image slowDown = new Image("SpeedDown.png");
     public static Image powerupOpposite = new Image("opposite.png");
+    public static Image background = new Image("green.jpg");
     //.. put here the other images you want to use
 
     public static boolean leftKeyDown;
@@ -32,7 +37,7 @@ public class Globals {
     public static List<GameEntity> newGameObjects; // Holds game objects crated in this frame.
     public static List<GameEntity> oldGameObjects; // Holds game objects that will be destroyed this frame.
     public static GameLoop gameLoop;
-    public static String soundTrack = "resources/midnightRiver.mp3";
+    public static String soundTrack = "resources/snake.wav";
     public static Media music= new Media(new File(soundTrack).toURI().toString());
     public static MediaPlayer mediaPlayer1 = new MediaPlayer(music);
 

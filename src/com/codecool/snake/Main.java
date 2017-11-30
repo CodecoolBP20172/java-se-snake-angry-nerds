@@ -3,6 +3,7 @@ package com.codecool.snake;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
@@ -22,6 +23,7 @@ public class Main extends Application{
     public void start(Stage primaryStage) throws InterruptedException {
 
         Game game = new Game();
+        game.setBackground(Globals.background);
         Timer timer;
 
         primaryStage.setTitle("Snake Game");
@@ -41,7 +43,7 @@ public class Main extends Application{
                 });
             }
         };
-        timer = new Timer(1000 ,taskPerformer);
+        timer = new Timer(1500 ,taskPerformer);
         timer.setRepeats(true);
         timer.start();
 
