@@ -14,14 +14,15 @@ import java.util.List;
 
 public class SnakeHead extends GameEntity implements Animatable {
 
-    private static final float speed = 2;
-    private static final float turnRate = 2;
+    private float speed = 2;
+    private float turnRate = 2;
     private GameEntity tail; // the last element. Needed to know where to add the next part.
     private List<SnakeBody> bodyParts = new ArrayList<>();
     private int health;
     private KeyControl keyControl;
     private boolean isAlive;
     private boolean healthChanged = false;
+    private boolean oppositeDirection = false;
     private HealthBar healthBar;
     private int index;
 
@@ -40,6 +41,35 @@ public class SnakeHead extends GameEntity implements Animatable {
         addPart(4);
     }
 
+    public float getSpeed() {
+        return speed;
+    }
+
+    public float getTurnRate() {
+        return turnRate;
+    }
+
+    public void setSpeed(float speed) {
+        this.speed = speed;
+    }
+
+    public void setTurnRate (float rate) {
+        this.turnRate = rate;
+    }
+
+    public boolean getOppositeDirection() {
+        return this.oppositeDirection;
+    }
+
+    public void setOppositeDirection() {
+        if(oppositeDirection) {
+            oppositeDirection = false;
+        }
+        else {
+            oppositeDirection = true;
+        }
+    }
+
     public void step() {
         if (healthChanged) {
             this.healthChanged = false;
@@ -49,11 +79,21 @@ public class SnakeHead extends GameEntity implements Animatable {
             return;
         }
         double dir = getRotate();
-        if (this.keyControl.isLeftKeyPressed()) {
-            dir = dir - turnRate;
+        if (oppositeDirection) {
+            if (this.keyControl.isRightKeyPressed()) {
+                dir = dir - turnRate;
+            }
+            if (this.keyControl.isLeftKeyPressed()) {
+                dir = dir + turnRate;
+            }
         }
-        if (this.keyControl.isRightKeyPressed()) {
-            dir = dir + turnRate;
+        else {
+            if (this.keyControl.isLeftKeyPressed()) {
+                dir = dir - turnRate;
+            }
+            if (this.keyControl.isRightKeyPressed()) {
+                dir = dir + turnRate;
+            }
         }
         // set rotation and position
         setRotate(dir);

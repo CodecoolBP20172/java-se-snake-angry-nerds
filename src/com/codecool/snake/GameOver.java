@@ -6,6 +6,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.effect.GaussianBlur;
 import javafx.scene.effect.InnerShadow;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
@@ -22,8 +23,11 @@ public class GameOver extends Menu {
         Pane root = new Pane();
         root.setPrefSize(Globals.WINDOW_WIDTH, Globals.WINDOW_HEIGHT);
 
-        Rectangle backGround = new Rectangle(Globals.WINDOW_WIDTH, Globals.WINDOW_HEIGHT);
-        backGround.setFill(Color.WHITESMOKE);
+        ImageView backGround = new ImageView();
+        backGround.setImage(Globals.background);
+        backGround.setFitWidth(Globals.WINDOW_WIDTH);
+        backGround.setFitHeight(Globals.WINDOW_HEIGHT);
+
         ContentFrame frame1 = new ContentFrame(createTitleContent("Game Over"));
         ContentFrame frame2 = new ContentFrame(createImageContent(140, 140, Globals.gameOverImg));
 
