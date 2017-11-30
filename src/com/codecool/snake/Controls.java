@@ -24,8 +24,8 @@ public class Controls extends Menu{
         Rectangle backGround = new Rectangle(Globals.WINDOW_WIDTH, Globals.WINDOW_HEIGHT);
         backGround.setFill(Color.WHITESMOKE);
 
-        ContentFrame frame1 = new ContentFrame(createTitleContent());
-        ContentFrame frame2 = new ContentFrame(createImageContent(140, 140));
+        ContentFrame frame1 = new ContentFrame(createTitleContent("Angry Snake"));
+        ContentFrame frame2 = new ContentFrame(createImageContent(140, 140, Globals.snakeMenu));
 
         VBox vbox = new VBox(25, frame1, frame2);
         vbox.setAlignment(Pos.BOTTOM_LEFT);
