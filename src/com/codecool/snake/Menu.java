@@ -65,14 +65,10 @@ public class Menu {
         Pane root = new Pane();
         root.setPrefSize(Globals.WINDOW_WIDTH, Globals.WINDOW_HEIGHT);
 
-        /*ImageView backGround = new ImageView();
-        backGround.setImage(Globals.snakeMenu);
-        backGround.setFitWidth(900);
-        backGround.setFitHeight(600);
-        backGround.setOpacity(0);*/
-
-        Rectangle backGround = new Rectangle(Globals.WINDOW_WIDTH, Globals.WINDOW_HEIGHT);
-        backGround.setFill(Color.WHITESMOKE);
+        ImageView backGround = new ImageView();
+        backGround.setImage(Globals.background);
+        backGround.setFitWidth(Globals.WINDOW_WIDTH);
+        backGround.setFitHeight(Globals.WINDOW_HEIGHT);
 
         ContentFrame frame1 = new ContentFrame(createTitleContent("Angry Snake"));
         ContentFrame frame2 = new ContentFrame(createImageContent(140, 140, Globals.snakeMenu));
@@ -189,7 +185,7 @@ public class Menu {
         public void setActive(boolean b) {
             c1.setVisible(b);
             c2.setVisible(b);
-            text.setFill(b ? Color.BLACK : Color.GREY);
+            text.setFill(b ? Color.BLACK : Color.WHITE);
         }
 
         public void setOnActivate(Runnable r) {
