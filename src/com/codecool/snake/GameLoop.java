@@ -21,6 +21,10 @@ public class GameLoop extends AnimationTimer {
                 for (GameEntity entity : Globals.gameObjects){
                     entity.destroy();
                 }
+                for (KeyControl playerControl: Globals.keyControls) {
+                    playerControl.setRightKeyPressed(false);
+                    playerControl.setLeftKeyPressed(false);
+                }
                 Globals.stage.setScene(new GameOver().createScene());
                 break;
             }
