@@ -90,8 +90,6 @@ public class SnakeHead extends GameEntity implements Animatable {
         if (isOutOfBounds() || health <= 0) {
             healthBar.changeHealth(0);
             isAlive = false;
-            /*
-            Globals.gameLoop.stop();*/
         }
     }
 

@@ -9,6 +9,7 @@ import javafx.scene.effect.InnerShadow;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
+import javafx.scene.paint.Paint;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
@@ -78,7 +79,7 @@ public class GameOver extends Menu {
             t.setX(80);
             t.setY(300);
             t.setText(String.valueOf("P" + player +": " + snakehead.getBodyParts().size()));
-            t.setFill(Color.BLACK);
+            t.setFill((Paint) Globals.bodyImages.get(player-1).get(1));
             t.setFont(Font.font(null, FontWeight.BOLD, 30));
             t.setEffect(new GaussianBlur(2));
             t.setTranslateX(45);

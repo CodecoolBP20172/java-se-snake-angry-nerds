@@ -5,6 +5,7 @@ import com.codecool.snake.Globals;
 import com.codecool.snake.entities.Animatable;
 import com.sun.javafx.geom.Vec2d;
 import javafx.scene.Node;
+import javafx.scene.image.Image;
 import javafx.scene.layout.Pane;
 
 import java.util.LinkedList;
@@ -23,7 +24,7 @@ public class SnakeBody extends GameEntity implements Animatable {
         this.parent = parent;
         findAndSetSnakeHead();
 
-        setImage(Globals.bodyImages.get(index));
+        setImage((Image) Globals.bodyImages.get(index).get(0));
 
         // place it visually below the current tail
         List<Node> children = pane.getChildren();

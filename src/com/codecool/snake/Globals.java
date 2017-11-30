@@ -5,6 +5,7 @@ import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
+import javafx.scene.paint.Paint;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.LinkedList;
@@ -31,7 +32,7 @@ public class Globals {
     public static Image simpleEnemy = new Image("simple_enemy.png");
     public static Image powerupBerry = new Image("powerup_berry.png");
     public static Image snakeMenu = new Image("snake.png");
-    public static List<Image> bodyImages = addBodyImages();
+    public static List<List<Object>> bodyImages = addBodyImages();
     //.. put here the other images you want to use
 
     public static KeyControl player1KeyControl = new KeyControl();
@@ -72,12 +73,19 @@ public class Globals {
         return keyControls;
     }
 
-    public static List<Image> addBodyImages(){
-        ArrayList<Image> bodyImages = new ArrayList <>();
-        bodyImages.add(snakeBodyGreen);
-        bodyImages.add(snakeBodyPurple);
-        bodyImages.add(snakeBodyTur);
-        bodyImages.add(snakeBodyBlue);
+    public static List<List<Object>> addBodyImages(){
+        List<List<Object>> bodyImages = new ArrayList();
+        for (int i = 0; i < 4; i++) {
+            bodyImages.add(new ArrayList <>());
+        }
+        bodyImages.get(0).add(snakeBodyGreen);
+        bodyImages.get(0).add(Paint.valueOf("GREEN"));
+        bodyImages.get(1).add(snakeBodyPurple);
+        bodyImages.get(1).add(Paint.valueOf("MAGENTA"));
+        bodyImages.get(2).add(snakeBodyTur);
+        bodyImages.get(2).add(Paint.valueOf("CYAN"));
+        bodyImages.get(3).add(snakeBodyBlue);
+        bodyImages.get(3).add(Paint.valueOf("BLUE"));
         return bodyImages;
     }
 }
