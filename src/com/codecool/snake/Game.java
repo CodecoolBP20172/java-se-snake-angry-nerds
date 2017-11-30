@@ -16,7 +16,7 @@ public class Game extends Pane {
     public Game() {
 
         HealthBar healthBar = new HealthBar(this, "P1: ", 30,60);
-        SnakeHead snakeHead = new SnakeHead(this, 500, 500, Globals.player1KeyControl, healthBar);
+        SnakeHead snakeHead = new SnakeHead(this, 500, 500, Globals.player1KeyControl, healthBar, 0);
         snakeHeads.add(snakeHead);
 
         new SimpleEnemy(this);
