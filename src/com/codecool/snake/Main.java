@@ -1,52 +1,21 @@
 package com.codecool.snake;
 
+
 import javafx.application.Application;
-import javafx.application.Platform;
-import javafx.scene.Scene;
-import javafx.scene.image.Image;
-import javafx.scene.media.Media;
-import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
 
-import javax.swing.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.io.File;
 
-public class Main extends Application{
+public class Main extends Application {
+
+    @Override
+    public void start(Stage primaryStage) throws Exception {
+        Globals.stage = primaryStage;
+        Globals.scene = new Menu().createScene();
+        primaryStage.setScene(Globals.scene);
+        primaryStage.show();
+    }
 
     public static void main(String[] args) {
         launch(args);
     }
-
-    @Override
-    public void start(Stage primaryStage) throws InterruptedException {
-
-        Game game = new Game();
-        game.setBackground(Globals.background);
-        Timer timer;
-
-        primaryStage.setTitle("Snake Game");
-        primaryStage.setScene(new Scene(game, Globals.WINDOW_WIDTH, Globals.WINDOW_HEIGHT));
-        primaryStage.show();
-        game.start();
-        ActionListener taskPerformer = new ActionListener() {
-            public void actionPerformed(ActionEvent evt) {
-                Platform.runLater(new Runnable() {
-                    @Override
-                    public void run() {
-                        if (Globals.gameOver) {
-                            System.exit(0);
-                        }
-                        game.createPowerup();
-                    }
-                });
-            }
-        };
-        timer = new Timer(1500 ,taskPerformer);
-        timer.setRepeats(true);
-        timer.start();
-
-    }
-
 }

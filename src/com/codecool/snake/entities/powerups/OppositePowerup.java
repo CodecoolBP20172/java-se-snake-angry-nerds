@@ -32,11 +32,11 @@ public class OppositePowerup extends GameEntity implements Interactable {
     @Override
     public void apply(SnakeHead snakeHead) {
         mediaPlayer1.play();
-        if(Globals.oppositeDirection) {
-            Globals.oppositeDirection = false;
+        if(snakeHead.getOppositeDirection()) {
+            snakeHead.setOppositeDirection();
         }
         else {
-            Globals.oppositeDirection = true;
+            snakeHead.setOppositeDirection();
         }
         destroy();
         new OppositePowerup(super.pane);

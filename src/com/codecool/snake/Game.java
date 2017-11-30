@@ -6,20 +6,42 @@ import com.codecool.snake.entities.powerups.OppositePowerup;
 import com.codecool.snake.entities.powerups.SimplePowerup;
 import com.codecool.snake.entities.powerups.SlowDownPowerup;
 import com.codecool.snake.entities.snakes.SnakeHead;
+import javafx.application.Platform;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.layout.*;
 
+import javax.swing.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.Random;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class Game extends Pane {
 
+    public static List<SnakeHead> snakeHeads = new ArrayList<>();
+
+        static Timer timer;
 
     public Game() {
-        new SnakeHead(this, 500, 500);
+
+        HealthBar healthBar = new HealthBar(this, "P1: ", 30, 60);
+        SnakeHead snakeHead = new SnakeHead(this, 500, 500, Globals.player1KeyControl, healthBar);
+        snakeHeads.add(snakeHead);
+        setBackground(Globals.background);
+
+        new SimpleEnemy(this);
+        new SimpleEnemy(this);
+        new SimpleEnemy(this);
+        new SimpleEnemy(this);
+
+        createPowerups();
+
     }
 
-    public void createPowerup() {
+    public void Powerup() {
         Random random = new Random();
         int  number = random.nextInt(100);
         if (number < 50) {
@@ -40,20 +62,53 @@ public class Game extends Pane {
 
     }
 
+    public void createPowerups() {
+        ActionListener taskPerformer = new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
+                Platform.runLater(new Runnable() {
+                    @Override
+                    public void run() {
+                        Powerup();
+                    }
+                });
+            }
+        };
+        timer = new Timer(1500 ,taskPerformer);
+        timer.setRepeats(true);
+        timer.start();
+        if(checkGameOver()) {
+            timer.stop();
+        }
+    }
+
     public void start() {
 
         Scene scene = getScene();
         scene.setOnKeyPressed(event -> {
             switch (event.getCode()) {
-                case LEFT:  Globals.leftKeyDown  = true; break;
-                case RIGHT: Globals.rightKeyDown  = true; break;
+                case ESCAPE: Globals.gameLoop.stop();
+                            Globals.stage.setScene(Globals.scene); break;
+                case LEFT:  Globals.player1KeyControl.setLeftKeyPressed(true); break;
+                case RIGHT: Globals.player1KeyControl.setRightKeyPressed(true); break;
+                case A: Globals.player2KeyControl.setLeftKeyPressed(true); break;
+                case D: Globals.player2KeyControl.setRightKeyPressed(true); break;
+                case NUMPAD4:  Globals.player3KeyControl.setLeftKeyPressed(true); break;
+                case NUMPAD6: Globals.player3KeyControl.setRightKeyPressed(true); break;
+                case B: Globals.player4KeyControl.setLeftKeyPressed(true); break;
+                case M: Globals.player4KeyControl.setRightKeyPressed(true); break;
             }
         });
 
         scene.setOnKeyReleased(event -> {
             switch (event.getCode()) {
-                case LEFT:  Globals.leftKeyDown  = false; break;
-                case RIGHT: Globals.rightKeyDown = false; break;
+                case LEFT:  Globals.player1KeyControl.setLeftKeyPressed(false); break;
+                case RIGHT: Globals.player1KeyControl.setRightKeyPressed(false); break;
+                case A: Globals.player2KeyControl.setLeftKeyPressed(false); break;
+                case D: Globals.player2KeyControl.setRightKeyPressed(false); break;
+                case NUMPAD4:  Globals.player3KeyControl.setLeftKeyPressed(false); break;
+                case NUMPAD6: Globals.player3KeyControl.setRightKeyPressed(false); break;
+                case B: Globals.player4KeyControl.setLeftKeyPressed(false); break;
+                case M: Globals.player4KeyControl.setRightKeyPressed(false); break;
             }
         });
         Globals.gameLoop = new GameLoop();
@@ -65,5 +120,14 @@ public class Game extends Pane {
         setBackground(new Background(new BackgroundImage(tableBackground,
                 BackgroundRepeat.REPEAT, BackgroundRepeat.REPEAT,
                 BackgroundPosition.CENTER, BackgroundSize.DEFAULT)));
+    }
+
+    public static boolean checkGameOver(){
+        for (SnakeHead snakeHead:snakeHeads) {
+            if (snakeHead.isAlive()){
+                return false;
+            }
+        }
+        return true;
     }
 }
