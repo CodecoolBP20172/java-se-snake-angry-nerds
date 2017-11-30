@@ -16,6 +16,8 @@ public class GameLoop extends AnimationTimer {
             }
             if (Game.checkGameOver()){
                 Globals.gameLoop.stop();
+                Globals.stage.setScene(new GameOver().createScene());
+                break;
             }
         }
         Globals.gameObjects.addAll(Globals.newGameObjects);
