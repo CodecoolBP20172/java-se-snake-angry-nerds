@@ -1,6 +1,8 @@
 package com.codecool.snake.entities;
 
 import com.codecool.snake.Globals;
+import javafx.geometry.Bounds;
+import javafx.geometry.Point2D;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 
@@ -28,5 +30,16 @@ public abstract class GameEntity extends ImageView {
             return true;
         }
         return false;
+    }
+
+    public boolean snakeIntersects(GameEntity b) {
+        Bounds headBounds = getBoundsInParent();
+        Bounds bodyBounds = b.getBoundsInParent();
+        Point2D headCenter = new Point2D((headBounds.getMaxX() + headBounds.getMinX()) * 0.5,
+                (headBounds.getMaxY() + headBounds.getMinY()) * 0.5);
+        Point2D bodyCenter = new Point2D((bodyBounds.getMaxX() + bodyBounds.getMinX()) * 0.5,
+                (bodyBounds.getMaxY() + bodyBounds.getMinY()) * 0.5);
+        final double radius = (bodyBounds.getMaxX() - bodyBounds.getMinX()) * 0.5;
+        return headCenter.subtract(bodyCenter).magnitude() < 2.0 * radius;
     }
 }

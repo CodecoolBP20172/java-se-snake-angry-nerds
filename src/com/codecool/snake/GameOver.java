@@ -35,15 +35,15 @@ public class GameOver extends Menu {
         MenuItem restart = new MenuItem("RESTART");
         restart.setOnActivate(() -> {
             if (Globals.numOfPlayers == 1) {
-                Game game = new Game();
-                Globals.stage.setScene(new Scene(game, Globals.WINDOW_WIDTH, Globals.WINDOW_HEIGHT));
+                Globals.game = new Game();
+                Globals.stage.setScene(new Scene(Globals.game, Globals.WINDOW_WIDTH, Globals.WINDOW_HEIGHT));
                 Globals.stage.show();
-                game.start();
+                Globals.game.start();
             } else {
-                Game game = new MultiPlayerGame(Globals.numOfPlayers);
-                Globals.stage.setScene(new Scene(game, Globals.WINDOW_WIDTH, Globals.WINDOW_HEIGHT));
+                Globals.game = new MultiPlayerGame(Globals.numOfPlayers);
+                Globals.stage.setScene(new Scene(Globals.game, Globals.WINDOW_WIDTH, Globals.WINDOW_HEIGHT));
                 Globals.stage.show();
-                game.start();
+                Globals.game.start();
             }
         });
         menuBox = new VBox(15,

@@ -11,7 +11,7 @@ import java.util.List;
 
 public class Game extends Pane {
 
-    protected static List<SnakeHead> snakeHeads = new ArrayList<>();
+    public static List<SnakeHead> snakeHeads = new ArrayList<>();
 
     public Game() {
 

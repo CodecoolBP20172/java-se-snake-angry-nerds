@@ -9,12 +9,15 @@ import com.codecool.snake.Utils;
 import com.codecool.snake.entities.Interactable;
 import javafx.geometry.Point2D;
 import javafx.scene.layout.Pane;
+import java.util.ArrayList;
+import java.util.List;
 
 public class SnakeHead extends GameEntity implements Animatable {
 
     private static final float speed = 2;
     private static final float turnRate = 2;
     private GameEntity tail; // the last element. Needed to know where to add the next part.
+    private List<SnakeBody> bodyParts = new ArrayList<>();
     private int health;
     private KeyControl keyControl;
     private boolean isAlive;
@@ -61,9 +64,23 @@ public class SnakeHead extends GameEntity implements Animatable {
             if (getBoundsInParent().intersects(entity.getBoundsInParent())) {
                 if (entity instanceof Interactable) {
                     Interactable interactable = (Interactable) entity;
-                    interactable.apply(this);
-                    System.out.println(interactable.getMessage());
+                    if (snakeIntersects(entity)) {
+                        interactable.apply(this);
+                        System.out.println(interactable.getMessage());
+                    }
                 }
+                else if (entity instanceof SnakeBody){
+                    if (this.bodyPartsToAvoid().contains(entity) || ((SnakeBody) entity).getSnakeHead() != this){
+                        if (snakeIntersects(entity)) {
+                            health = 0;
+                        }
+                    }
+                }
+                else if (entity instanceof SnakeHead && entity != this){
+                        if (snakeIntersects(entity)){
+                            health = 0;
+                        }
+                    }
             }
         }
 
@@ -79,9 +96,19 @@ public class SnakeHead extends GameEntity implements Animatable {
     public void addPart(int numParts) {
         for (int i = 0; i < numParts; i++) {
             SnakeBody newPart = new SnakeBody(pane, tail);
+            bodyParts.add(newPart);
             tail = newPart;
         }
     }
+
+    public List<SnakeBody> getBodyParts(){
+        return bodyParts;
+    }
+
+    public List<SnakeBody> bodyPartsToAvoid(){
+        return bodyParts.subList(4, bodyParts.size());
+    }
+
 
     public void changeHealth(int diff) {
         health += diff;
@@ -91,5 +118,4 @@ public class SnakeHead extends GameEntity implements Animatable {
     public boolean isAlive() {
         return isAlive;
     }
-
 }
