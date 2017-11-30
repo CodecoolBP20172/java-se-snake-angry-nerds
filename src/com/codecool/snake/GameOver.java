@@ -1,12 +1,18 @@
 package com.codecool.snake;
 
+import com.codecool.snake.entities.snakes.SnakeHead;
 import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.effect.GaussianBlur;
+import javafx.scene.effect.InnerShadow;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
+import javafx.scene.text.Text;
 
 
 public class GameOver extends Menu {
@@ -55,6 +61,31 @@ public class GameOver extends Menu {
 
         getMenuItem(0).setActive(true);
         root.getChildren().addAll(backGround, hbox, menuBox);
+        Text scoreHeader = new Text();
+        scoreHeader.setX(70);
+        scoreHeader.setY(250);
+        scoreHeader.setText(String.valueOf("Scores:"));
+        scoreHeader.setFill(Color.RED);
+        scoreHeader.setFont(Font.font(null, FontWeight.BOLD, 40));
+        scoreHeader.setEffect(new GaussianBlur(2));
+        scoreHeader.setTranslateX(30);
+        scoreHeader.setTranslateY(0);
+        root.getChildren().add(scoreHeader);
+
+        int player = 1;
+        for (SnakeHead snakehead: Game.snakeHeads) {
+            Text t = new Text();
+            t.setX(80);
+            t.setY(300);
+            t.setText(String.valueOf("P" + player +": " + snakehead.getBodyParts().size()));
+            t.setFill(Color.BLACK);
+            t.setFont(Font.font(null, FontWeight.BOLD, 30));
+            t.setEffect(new GaussianBlur(2));
+            t.setTranslateX(45);
+            t.setTranslateY(50*player++);
+            root.getChildren().add(t);
+        }
+
         return root;
     }
 }

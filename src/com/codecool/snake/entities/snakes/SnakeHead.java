@@ -10,6 +10,7 @@ import com.codecool.snake.entities.Interactable;
 import javafx.geometry.Point2D;
 import javafx.scene.layout.Pane;
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 public class SnakeHead extends GameEntity implements Animatable {
@@ -22,7 +23,7 @@ public class SnakeHead extends GameEntity implements Animatable {
     private KeyControl keyControl;
     private boolean isAlive;
     private boolean healthChanged = false;
-    HealthBar healthBar;
+    private HealthBar healthBar;
 
     public SnakeHead(Pane pane, int xc, int yc, KeyControl keyControl, HealthBar healthBar) {
         super(pane);
