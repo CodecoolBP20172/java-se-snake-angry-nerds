@@ -23,7 +23,7 @@ public class Globals {
 
     public static Integer numOfPlayers;
 
-    public static Game game;
+
     public static Image snakeHead = new Image("snake_head.png");
     public static Image snakeBodyGreen = new Image("snake_body.png");
     public static Image snakeBodyPurple = new Image("snake_body_purple.png");
