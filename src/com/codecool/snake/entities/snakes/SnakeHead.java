@@ -23,8 +23,9 @@ public class SnakeHead extends GameEntity implements Animatable {
     private boolean isAlive;
     private boolean healthChanged = false;
     HealthBar healthBar;
+    private int index;
 
-    public SnakeHead(Pane pane, int xc, int yc, KeyControl keyControl, HealthBar healthBar) {
+    public SnakeHead(Pane pane, int xc, int yc, KeyControl keyControl, HealthBar healthBar, int index) {
         super(pane);
         setX(xc);
         setY(yc);
@@ -35,6 +36,7 @@ public class SnakeHead extends GameEntity implements Animatable {
         this.keyControl = keyControl;
         isAlive = true;
         this.healthBar = healthBar;
+        this.index = index;
         addPart(4);
     }
 
@@ -95,7 +97,7 @@ public class SnakeHead extends GameEntity implements Animatable {
 
     public void addPart(int numParts) {
         for (int i = 0; i < numParts; i++) {
-            SnakeBody newPart = new SnakeBody(pane, tail);
+            SnakeBody newPart = new SnakeBody(pane, tail, index);
             bodyParts.add(newPart);
             tail = newPart;
         }

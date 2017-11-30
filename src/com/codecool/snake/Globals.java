@@ -24,10 +24,14 @@ public class Globals {
 
     public static Game game;
     public static Image snakeHead = new Image("snake_head.png");
-    public static Image snakeBody = new Image("snake_body.png");
+    public static Image snakeBodyGreen = new Image("snake_body.png");
+    public static Image snakeBodyPurple = new Image("snake_body_purple.png");
+    public static Image snakeBodyBlue = new Image("snake_body_blue.png");
+    public static Image snakeBodyTur = new Image("snake_body_tur.png");
     public static Image simpleEnemy = new Image("simple_enemy.png");
     public static Image powerupBerry = new Image("powerup_berry.png");
     public static Image snakeMenu = new Image("snake.png");
+    public static List<Image> bodyImages = addBodyImages();
     //.. put here the other images you want to use
 
     public static KeyControl player1KeyControl = new KeyControl();
@@ -66,5 +70,14 @@ public class Globals {
         keyControls.add(player3KeyControl);
         keyControls.add(player4KeyControl);
         return keyControls;
+    }
+
+    public static List<Image> addBodyImages(){
+        ArrayList<Image> bodyImages = new ArrayList <>();
+        bodyImages.add(snakeBodyGreen);
+        bodyImages.add(snakeBodyPurple);
+        bodyImages.add(snakeBodyTur);
+        bodyImages.add(snakeBodyBlue);
+        return bodyImages;
     }
 }
