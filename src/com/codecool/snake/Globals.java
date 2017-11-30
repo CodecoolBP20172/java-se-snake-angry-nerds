@@ -37,7 +37,7 @@ public class Globals {
     public static List<GameEntity> newGameObjects; // Holds game objects crated in this frame.
     public static List<GameEntity> oldGameObjects; // Holds game objects that will be destroyed this frame.
     public static GameLoop gameLoop;
-    public static String soundTrack = "resources/snake.wav";
+    public static String soundTrack = "resources/snake.mp3";
     public static Media music= new Media(new File(soundTrack).toURI().toString());
     public static MediaPlayer mediaPlayer1 = new MediaPlayer(music);
 
