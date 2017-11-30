@@ -3,7 +3,6 @@ package com.codecool.snake;
 import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
@@ -20,8 +19,8 @@ public class MultiMenu extends Menu {
         Rectangle backGround = new Rectangle(Globals.WINDOW_WIDTH, Globals.WINDOW_HEIGHT);
         backGround.setFill(Color.WHITESMOKE);
 
-        ContentFrame frame1 = new ContentFrame(createTitleContent());
-        ContentFrame frame2 = new ContentFrame(createImageContent(140, 140));
+        ContentFrame frame1 = new ContentFrame(createTitleContent("Angry Snake"));
+        ContentFrame frame2 = new ContentFrame(createImageContent(140, 140, Globals.snakeMenu));
 
         VBox hbox = new VBox(25, frame1, frame2);
         hbox.setAlignment(Pos.BOTTOM_LEFT);
@@ -38,6 +37,7 @@ public class MultiMenu extends Menu {
         MenuItem itemTwoPlayers = new MenuItem("TWO PLAYERS");
         itemTwoPlayers.setOnActivate(() -> {
             Game game = new MultiPlayerGame(2);
+            Globals.numOfPlayers = 2;
             Globals.stage.setScene(new Scene(game, Globals.WINDOW_WIDTH, Globals.WINDOW_HEIGHT));
             Globals.stage.show();
             game.start();
@@ -46,6 +46,7 @@ public class MultiMenu extends Menu {
         MenuItem itemThreePlayers = new MenuItem("THREE PLAYERS");
         itemThreePlayers.setOnActivate(() -> {
             Game game = new MultiPlayerGame(3);
+            Globals.numOfPlayers = 3;
             Globals.stage.setScene(new Scene(game, Globals.WINDOW_WIDTH, Globals.WINDOW_HEIGHT));
             Globals.stage.show();
             game.start();
@@ -54,6 +55,7 @@ public class MultiMenu extends Menu {
         MenuItem itemFourPlayers = new MenuItem("FOUR PLAYERS");
         itemFourPlayers.setOnActivate(() -> {
             Game game = new MultiPlayerGame(4);
+            Globals.numOfPlayers = 4;
             Globals.stage.setScene(new Scene(game, Globals.WINDOW_WIDTH, Globals.WINDOW_HEIGHT));
             Globals.stage.show();
             game.start();
