@@ -15,9 +15,9 @@ import java.util.Random;
 // a simple powerup that makes the snake grow TODO make other powerups
 public class SlowDownPowerup extends GameEntity implements Interactable {
 
-    String soundTrack = "resources/powerdown.wav";
-    Media music= new Media(new File(soundTrack).toURI().toString());
-    MediaPlayer mediaPlayer1 = new MediaPlayer(music);
+    static String soundTrack = "resources/powerdown.wav";
+    static Media music= new Media(new File(soundTrack).toURI().toString());
+    static MediaPlayer mediaPlayer1 = new MediaPlayer(music);
 
     public SlowDownPowerup(Pane pane) {
         super(pane);
