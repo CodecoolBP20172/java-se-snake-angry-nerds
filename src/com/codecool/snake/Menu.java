@@ -15,6 +15,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.media.MediaPlayer;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
@@ -36,6 +37,8 @@ public class Menu {
     protected int currentItem = 0;
 
     public Scene createScene() {
+        Globals.mediaPlayer1.play();
+        Globals.mediaPlayer1.setCycleCount(MediaPlayer.INDEFINITE);
 
         Scene scene = new Scene(createContent());
 

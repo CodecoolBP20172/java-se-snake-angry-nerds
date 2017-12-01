@@ -113,7 +113,6 @@ public class Game extends Pane {
         });
         Globals.gameLoop = new GameLoop();
         Globals.gameLoop.start();
-        Globals.mediaPlayer1.play();
     }
 
     public void setBackground(Image tableBackground) {
