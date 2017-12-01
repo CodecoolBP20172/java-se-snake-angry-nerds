@@ -15,9 +15,9 @@ import java.util.Random;
 // a simple powerup that makes the snake grow TODO make other powerups
 public class OppositePowerup extends GameEntity implements Interactable {
 
-    static String soundTrack = "resources/opposite.wav";
-    static Media music= new Media(new File(soundTrack).toURI().toString());
-    static MediaPlayer mediaPlayer1 = new MediaPlayer(music);
+    String soundTrack = "resources/opposite.wav";
+    Media music= new Media(new File(soundTrack).toURI().toString());
+    MediaPlayer mediaPlayer1 = new MediaPlayer(music);
 
     public OppositePowerup(Pane pane) {
         super(pane);
