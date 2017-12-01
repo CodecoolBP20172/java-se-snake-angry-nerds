@@ -1,5 +1,6 @@
 package com.codecool.snake;
 
+import com.codecool.snake.entities.GameEntity;
 import com.codecool.snake.entities.enemies.SimpleEnemy;
 import com.codecool.snake.entities.powerups.FastPowerup;
 import com.codecool.snake.entities.powerups.OppositePowerup;
@@ -87,7 +88,15 @@ public class Game extends Pane {
         scene.setOnKeyPressed(event -> {
             switch (event.getCode()) {
                 case ESCAPE: Globals.gameLoop.stop();
-                            Globals.stage.setScene(Globals.scene); break;
+                            Game.timer.stop();
+                            for (GameEntity entity : Globals.gameObjects){
+                                entity.destroy();
+                            }
+                            for (KeyControl playerControl: Globals.keyControls) {
+                                playerControl.setRightKeyPressed(false);
+                                playerControl.setLeftKeyPressed(false);
+                            }
+                            Globals.stage.setScene(new GameOver().createScene()); break;
                 case LEFT:  Globals.player1KeyControl.setLeftKeyPressed(true); break;
                 case RIGHT: Globals.player1KeyControl.setRightKeyPressed(true); break;
                 case Q: Globals.player2KeyControl.setLeftKeyPressed(true); break;
@@ -113,7 +122,6 @@ public class Game extends Pane {
         });
         Globals.gameLoop = new GameLoop();
         Globals.gameLoop.start();
-        Globals.mediaPlayer1.play();
     }
 
     public void setBackground(Image tableBackground) {
